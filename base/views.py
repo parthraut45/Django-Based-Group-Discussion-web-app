@@ -70,7 +70,7 @@ def home(request):
     return render(request , 'base/home.html', data)
 
 
-
+@login_required(login_url='log')
 def rooms(request , prime): #we are gonna have rooms to discuss a topic
     room = Room.objects.get(id = prime)
     room_messages = room.message_set.all().order_by('created')
@@ -78,7 +78,7 @@ def rooms(request , prime): #we are gonna have rooms to discuss a topic
     message = None
     if request.method == 'POST':
         message = Message.objects.create(
-           user = user,
+           user = request.user,
            room = room,
            body= request.POST.get('body')
         )
