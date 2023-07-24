@@ -78,7 +78,7 @@ def rooms(request , prime): #we are gonna have rooms to discuss a topic
     message = None
     if request.method == 'POST':
         message = Message.objects.create(
-           user = request.user,
+           user = user,
            room = room,
            body= request.POST.get('body')
         )
